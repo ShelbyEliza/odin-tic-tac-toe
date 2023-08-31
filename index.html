@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="game.js" type="module" defer></script>
+    <title>Tic Tac Toe Game</title>
+  </head>
+
+  <body>
+
+    <h1>Tic Tac Toes!</h1>
+    <div class="player-info">
+      <div class="form-wrapper">
+        <form>
+          <div class="player-x-details">
+            <label for="player-x">
+              <h3>Player X: </h3>
+              <input id="player-x" name="player-x" type="text" minlength="1" maxlength="18">
+            </label>
+          </div>
+          <div class="player-o-details">
+            <label for="player-o">
+              <h3>Player O: </h3>
+              <input id="player-o" name="player-o" type="text" minlength="1" maxlength="18">
+            </label>
+          </div>
+
+          <button class="set-players-btn" type="submit">Set Players</button>
+        </form>
+      </div>
+
+      <div class="player-details" style="display: none;">
+        <h3>Player</h3>
+        <h3>Score</h3>
+        <div>
+          <h4>X</h4>
+          <h4 class="player-x-name"></h4>
+        </div>
+        <div>
+          <p class="player-x-score score"></p>
+        </div>
+        <div>
+          <h4>O</h4>
+          <h4 class="player-o-name"></h4>
+        </div>
+        <div>
+          <p class="player-o-score score"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="game-board-wrapper">
+      <div class="square s-1">
+        <div id="1" class="marker-place mp-1">1</div>
+      </div>
+      <div class="square s-2">
+        <div id="2" class="marker-place mp-2">2</div>
+      </div>
+      <div class="square s-3">
+        <div id="3" class="marker-place mp-3">3</div>
+      </div>
+      <div class="square s-4">
+        <div id="4" class="marker-place mp-4">4</div>
+      </div>
+      <div class="square s-5">
+        <div id="5" class="marker-place mp-5">5</div>
+      </div>
+      <div class="square s-6">
+        <div id="6" class="marker-place mp-6">6</div>
+      </div>
+      <div class="square s-7">
+        <div id="7" class="marker-place mp-7">7</div>
+      </div>
+      <div class="square s-8">
+        <div id="8" class="marker-place mp-8">8</div>
+      </div>
+      <div class="square s-9">
+        <div id="9" class="marker-place mp-9">9</div>
+      </div>
+    </div>
+  </body>
+
+</html>

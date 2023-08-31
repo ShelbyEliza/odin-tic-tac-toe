@@ -1,0 +1,41 @@
+	function addMarker() {
+		let turnNow = displayController.getCurrentTurn();
+		let squareToMark = boardEls[currentSelection - 1];
+		// let lastTurn = turnLog[turnLog.length - 1];
+		// let currentMarker;
+		// if (turns === 0) {
+		// 	turnLog.push("X");
+		// 	currentMarker = "X";
+		// } else {
+		// 	if (lastTurn === "X") {
+		// 		currentMarker = "O";
+		// 		turnLog.push("O");
+		// 	} else if (lastTurn === "O") {
+		// 		currentMarker = "X";
+		// 		turnLog.push("X");
+		// 	}
+		// }
+		// squareToMark.textContent = currentMarker;
+		squareToMark.textContent = turnNow;
+
+		displayController.toggleCurrentTurn();
+		turns++;
+	}
+
+  Win Conditions: 
+    Minimum turns needed for a win: 5
+
+    Vertical Win: 
+      Number   | Index
+      1, 4, 7  | 0, 3, 6
+      2, 5, 8  | 1, 4, 7
+      3, 6, 9  | 2, 5, 8
+    Horizontal Win:
+      Number   | Index
+      1, 2, 3  | 0, 1, 2
+      4, 5, 6  | 3, 4, 5
+      7, 8, 9  | 6, 7, 8
+    Diagonal Win:
+      Number   | Index
+      1, 5, 9  | 0, 4, 8
+      3, 5, 7  | 2, 4, 6

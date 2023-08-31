@@ -1,0 +1,134 @@
+html,
+body {
+	min-height: 100%;
+	margin: 0 auto;
+
+	font-size: 16px;
+	font-family: sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	background: rgb(175, 238, 238);
+	color: rgb(176, 67, 85);
+}
+button,
+input {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	font-family: inherit;
+	font-size: 100%;
+}
+input {
+	width: 19ch;
+}
+button {
+	box-shadow: none;
+	border: none;
+}
+button:hover {
+	cursor: pointer;
+}
+
+h1 {
+	text-align: center;
+}
+h3 {
+	margin: 0.4rem;
+}
+h4 {
+	margin: 0.4rem;
+}
+p {
+	margin: 0.4rem;
+}
+
+.player-info {
+	display: flex;
+	margin: 0.4rem 4rem;
+	justify-content: center;
+
+	width: 40vw;
+	min-width: 500px;
+	margin: auto;
+
+	background: rgb(186, 186, 221);
+}
+form {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 1fr 1fr;
+
+	width: 100%;
+	padding: 1rem 2rem;
+	justify-items: center;
+}
+form input {
+	margin-left: 0.4rem;
+	padding: 0.2rem;
+}
+.player-x-details {
+	grid-column: 1 / 2;
+}
+.player-o-details {
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+}
+form button {
+	margin: 0.4rem;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+	height: max-content;
+	padding: 0.2rem 0.4rem;
+	align-self: end;
+}
+.player-details {
+	display: grid;
+	grid-template-columns: 40% 40%;
+	width: 100%;
+	padding: 1rem 2rem;
+
+	border: 1px solid salmon;
+	justify-content: space-between;
+}
+.player-details h3 {
+	border-bottom: 1px solid rgb(176, 67, 85);
+	padding-bottom: 0.2rem;
+}
+
+.player-details div {
+	display: flex;
+}
+.currentTurn {
+	color: white;
+}
+
+.game-board-wrapper {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(100px, 1fr));
+	grid-template-rows: repeat(3, minmax(100px, 1fr));
+	gap: 3px;
+	padding: 2%;
+
+	text-align: center;
+
+	background: rgb(221, 160, 170);
+	width: 50vw;
+	height: 50vw;
+	min-width: 300px;
+	min-height: 300px;
+	margin: auto;
+
+	/* border: 6px solid black; */
+	border-radius: 6%;
+}
+.square {
+	display: grid;
+	border-radius: 12%;
+	background: paleturquoise;
+	/* outline: solid black; */
+	width: 100%;
+	height: 100%;
+}
+.marker-place {
+	place-self: center;
+}
