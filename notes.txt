@@ -1,26 +1,3 @@
-	function addMarker() {
-		let turnNow = displayController.getCurrentTurn();
-		let squareToMark = boardEls[currentSelection - 1];
-		// let lastTurn = turnLog[turnLog.length - 1];
-		// let currentMarker;
-		// if (turns === 0) {
-		// 	turnLog.push("X");
-		// 	currentMarker = "X";
-		// } else {
-		// 	if (lastTurn === "X") {
-		// 		currentMarker = "O";
-		// 		turnLog.push("O");
-		// 	} else if (lastTurn === "O") {
-		// 		currentMarker = "X";
-		// 		turnLog.push("X");
-		// 	}
-		// }
-		// squareToMark.textContent = currentMarker;
-		squareToMark.textContent = turnNow;
-
-		displayController.toggleCurrentTurn();
-		turns++;
-	}
 
   Win Conditions: 
     Minimum turns needed for a win: 5
@@ -39,3 +16,16 @@
       Number   | Index
       1, 5, 9  | 0, 4, 8
       3, 5, 7  | 2, 4, 6
+
+
+    <div class="game-board-wrapper">
+      <div id="1" class="marker-place"><p>1</p></div>
+      <div id="2" class="marker-place"><p>2</p></div>
+      <div id="3" class="marker-place"><p>3</p></div>
+      <div id="4" class="marker-place"><p>4</p></div>
+      <div id="5" class="marker-place"><p>5</p></div>
+      <div id="6" class="marker-place"><p>6</p></div>
+      <div id="7" class="marker-place"><p>7</p></div>
+      <div id="8" class="marker-place"><p>8</p></div>
+      <div id="9" class="marker-place"><p>9</p></div>
+    </div>
