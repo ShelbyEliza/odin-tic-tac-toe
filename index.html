@@ -12,19 +12,16 @@
   <body>
 
     <h1>Tic Tac Toes!</h1>
-    <div class="player-info">
-      <div class="msg">
-        <p class="msg-text"></p>
-      </div>
+    <div class="info-container">
       <div class="form-wrapper">
         <form>
-          <div class="player-x-details">
+          <div class="x-details">
             <label for="player-x">
               <h3>Player X: </h3>
               <input id="player-x" name="player-x" type="text" minlength="1" maxlength="18">
             </label>
           </div>
-          <div class="player-o-details">
+          <div class="o-details">
             <label for="player-o">
               <h3>Player O: </h3>
               <input id="player-o" name="player-o" type="text" minlength="1" maxlength="18">
@@ -52,7 +49,6 @@
         <div>
           <p class="player-o-score score"></p>
         </div>
-
       </div>
     </div>
 
@@ -66,6 +62,15 @@
       <div id="7" class="marker-place clickable">7</div>
       <div id="8" class="marker-place clickable">8</div>
       <div id="9" class="marker-place clickable">9</div>
+    </div>
+    <div class="bottom-display">
+      <button>Play Again</button>
+      <button>Restart Round</button>
+      <!-- <button style="display: none;">Play Again</button>
+      <button style="display: none;">Restart Round</button> -->
+      <div class="msg">
+        <p class="msg-text"></p>
+      </div>
     </div>
   </body>
 

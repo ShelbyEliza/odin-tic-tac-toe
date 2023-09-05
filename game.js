@@ -164,6 +164,7 @@ const gameBoard = (() => {
 			}
 		} else {
 			displayController.setMsgEl("Please select player names!");
+			console.log("Please select player names!");
 		}
 	}
 
@@ -220,6 +221,9 @@ const displayController = (() => {
 		inputs.forEach((input) => {
 			if (input.value.length <= 0) {
 				msgEl.textContent = `Name(s) too short. Please enter a name between 1 and 22 characters.`;
+				console.log(
+					`Name(s) too short. Please enter a name between 1 and 22 characters.`
+				);
 				validName = false;
 			}
 		});

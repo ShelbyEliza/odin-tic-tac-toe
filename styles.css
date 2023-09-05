@@ -43,23 +43,30 @@ p {
 	margin: 0.4rem;
 }
 
-.player-info {
-	display: flex;
+.info-container {
+	display: grid;
 	margin: 0.4rem 4rem;
-	justify-content: center;
+	/* grid-template-rows: 3fr 1fr 1fr; */
 
-	width: 40vw;
+	width: 60vw;
 	min-width: 500px;
 	margin: auto;
 
-	/* background: rgb(186, 186, 221); */
+	/* background: rgb(230, 230, 240); */
+}
+.msg {
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: rgb(176, 67, 85);
 }
 form {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-template-rows: 1fr 1fr;
 
-	width: 100%;
+	/* width: 100%; */
 	padding: 1rem 2rem;
 	justify-items: center;
 }
@@ -67,12 +74,12 @@ form input {
 	margin-left: 0.4rem;
 	padding: 0.2rem;
 }
-.player-x-details {
+.x-details {
 	grid-column: 1 / 2;
 }
-.player-o-details {
-	grid-column: 1 / 2;
-	grid-row: 2 / 3;
+.o-details {
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
 }
 form button {
 	margin: 0.4rem;
@@ -85,7 +92,7 @@ form button {
 .player-details {
 	display: grid;
 	grid-template-columns: 40% 40%;
-	width: 100%;
+	/* width: 100%; */
 	padding: 1rem 2rem;
 
 	/* border: 1px solid salmon; */
@@ -115,6 +122,9 @@ form button {
 	background: rgb(66, 40, 131);
 	width: 50vw;
 	height: 50vw;
+	max-width: 60vh;
+	max-height: 60vh;
+
 	min-width: 300px;
 	min-height: 300px;
 	margin: auto;
@@ -132,7 +142,7 @@ form button {
 	border: 1px solid rgb(0, 29, 61);
 	background: rgb(186, 186, 221);
 	border-radius: 12%;
-	font-size: 7rem;
+	font-size: 6rem;
 }
 .clickable:hover {
 	cursor: pointer;
