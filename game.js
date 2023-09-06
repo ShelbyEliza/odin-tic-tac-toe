@@ -1,5 +1,5 @@
-let playerX;
-let playerO;
+let playerX = null;
+let playerO = null;
 
 const Player = (name, gameMark) => {
 	let score = 0;
@@ -8,34 +8,38 @@ const Player = (name, gameMark) => {
 
 	const getMarkList = () => markList;
 	const addToMarkList = (mark) => markList.push(parseInt(mark));
+	const clearMarkList = () => (markList = []);
 	function increaseScore() {
 		this.score++;
 	}
-	const printScore = () => console.log({ name, score, marker });
 	return {
 		increaseScore,
-		printScore,
 		name,
 		marker,
 		score,
-		addToMarkList,
 		getMarkList,
+		addToMarkList,
+		clearMarkList,
 	};
 };
 
 const gameFlow = (() => {
 	let winner = null;
-	let currentPlayer;
 	let turnsPlayed = 1;
+	let currentPlayer = null;
 
+	const getWinner = () => winner;
+	const getTurnsPlayed = () => turnsPlayed;
+	const getCurrentPlayer = () => currentPlayer;
+
+	const setTurnsPlayed = () => turnsPlayed++;
+	// const setCurrentPlayer = (player) => {
+	// 	currentPlayer = player;
+	// };
 	const setPlayers = (playerInputsEl) => {
 		playerX = Player(playerInputsEl[0].value, "X");
 		playerO = Player(playerInputsEl[1].value, "O");
 		currentPlayer = playerX;
-	};
-	const setTurnsPlayed = () => turnsPlayed++;
-	const setCurrentPlayer = (player) => {
-		currentPlayer = player;
 	};
 
 	const toggleCurrentTurn = () => {
@@ -49,12 +53,7 @@ const gameFlow = (() => {
 			setTurnsPlayed();
 			tempPlayer = playerX;
 		}
-		setCurrentPlayer(tempPlayer);
-	};
-	const getTurnsPlayed = () => turnsPlayed;
-	const getCurrentPlayer = () => currentPlayer;
-	const getWinner = () => {
-		winner;
+		currentPlayer = tempPlayer;
 	};
 
 	function checkForWin(currentMarker) {
@@ -75,8 +74,10 @@ const gameFlow = (() => {
 			markList = playerO.getMarkList();
 			currentPlayer = playerO;
 		}
-		let checker = (array, targetArray) =>
-			targetArray.every((n) => array.includes(n));
+
+		let checker = (playerList, winningCodes) =>
+			winningCodes.every((n) => playerList.includes(n));
+
 		switch (true) {
 			case checker(markList, firstRow):
 				winner = currentPlayer;
@@ -103,25 +104,37 @@ const gameFlow = (() => {
 				winner = currentPlayer;
 				break;
 			default:
-				console.log("No Winner!");
+				break;
 		}
 		if (winner) {
+			console.log();
 			displayController.setMsgEl(`${winner.name} wins!`);
 			if (winner.marker == "X") {
-				console.log(playerX.score);
 				playerX.increaseScore();
-				console.log(playerX.score);
-
 				displayController.setScore(playerX);
 			} else {
-				console.log();
 				playerO.increaseScore();
 				displayController.setScore(playerO);
 			}
+		} else if (turnsPlayed >= 9) {
+			displayController.setMsgEl("A tie has occurred! Try Again?");
+			console.log("A tie has occurred!");
 		} else {
 			toggleCurrentTurn();
 		}
 	}
+
+	const handleNewGame = () => {
+		playerX = null;
+		playerO = null;
+		turnsPlayed = 1;
+		winner = null;
+	};
+	const handleNewRound = () => {
+		currentPlayer = winner;
+		winner = null;
+		turnsPlayed = 1;
+	};
 
 	return {
 		setPlayers,
@@ -130,18 +143,27 @@ const gameFlow = (() => {
 		toggleCurrentTurn,
 		checkForWin,
 		getWinner,
+		handleNewGame,
+		handleNewRound,
 	};
 })();
 
 /** Sets up Board, Checks for Valid Moves, Changes board textContent */
 const gameBoard = (() => {
 	const boardEls = [...document.querySelectorAll(".marker-place")];
-	// let markedBoard = [];
 
-	boardEls.forEach((el) => {
-		el.addEventListener("click", (e) => handleSelectSquare(e));
-		// markedBoard.push(parseInt(el.id));
-	});
+	const addListeners = () => {
+		boardEls.forEach((el) => {
+			el.addEventListener("click", handleSelectSquare);
+		});
+	};
+
+	function resetSquares() {
+		boardEls.forEach((square) => {
+			square.textContent = "";
+			square.classList = "marker-place clickable";
+		});
+	}
 
 	function handleSelectSquare(e) {
 		let isDisplayBuilt = displayController.getDisplayStatus();
@@ -156,6 +178,7 @@ const gameBoard = (() => {
 					playerO.addToMarkList(e.target.id);
 				}
 				let numberOfTurns = gameFlow.getTurnsPlayed();
+
 				if (numberOfTurns >= 5) {
 					gameFlow.checkForWin(currentMarker);
 				} else {
@@ -164,13 +187,17 @@ const gameBoard = (() => {
 			}
 		} else {
 			displayController.setMsgEl("Please select player names!");
-			console.log("Please select player names!");
 		}
 	}
 
 	function checkSquareStatus(squareToMark) {
+		let winner = gameFlow.getWinner();
 		displayController.setMsgEl("");
-		if (squareToMark.textContent !== "O" && squareToMark.textContent !== "X") {
+		if (
+			squareToMark.textContent !== "O" &&
+			squareToMark.textContent !== "X" &&
+			winner === null
+		) {
 			return true;
 		} else {
 			displayController.setMsgEl("Invalid Square");
@@ -185,8 +212,12 @@ const gameBoard = (() => {
 		squareToMark.classList.remove("clickable");
 
 		squareToMark.textContent = currentMarker;
-		// markedBoard.splice(1, 1, currentMarker);
 	}
+
+	addListeners();
+	return {
+		resetSquares,
+	};
 })();
 
 const displayController = (() => {
@@ -201,6 +232,36 @@ const displayController = (() => {
 	const playerXScore = document.querySelector(".player-x-score");
 	const playerOName = document.querySelector(".player-o-name");
 	const playerOScore = document.querySelector(".player-o-score");
+
+	const newGameBtn = document.querySelector(".new-game");
+	const newRoundBtn = document.querySelector(".new-round");
+
+	newGameBtn.addEventListener("click", () => {
+		gameFlow.handleNewGame();
+		gameBoard.resetSquares();
+		resetGameDisplay();
+	});
+	newRoundBtn.addEventListener("click", () => {
+		gameFlow.handleNewRound();
+		gameBoard.resetSquares();
+		playerO.clearMarkList();
+		playerX.clearMarkList();
+
+		resetRoundDisplay();
+	});
+
+	const resetGameDisplay = () => {
+		displayBuilt = false;
+		msgEl.textContent = "";
+		playerDetails.style.display = "none";
+		playerForm.style.display = "block";
+		newGameBtn.style.display = "none";
+		newRoundBtn.style.display = "none";
+	};
+
+	const resetRoundDisplay = () => {
+		msgEl.textContent = "";
+	};
 
 	let displayBuilt = false;
 
@@ -221,9 +282,6 @@ const displayController = (() => {
 		inputs.forEach((input) => {
 			if (input.value.length <= 0) {
 				msgEl.textContent = `Name(s) too short. Please enter a name between 1 and 22 characters.`;
-				console.log(
-					`Name(s) too short. Please enter a name between 1 and 22 characters.`
-				);
 				validName = false;
 			}
 		});
@@ -238,6 +296,9 @@ const displayController = (() => {
 		playerXScore.textContent = playerX.score;
 		playerOName.textContent = playerO.name;
 		playerOScore.textContent = playerO.score;
+
+		newGameBtn.style.display = "block";
+		newRoundBtn.style.display = "block";
 
 		playerXName.classList.add("currentTurn");
 
@@ -268,5 +329,6 @@ const displayController = (() => {
 		getDisplayStatus,
 		setMsgEl,
 		setScore,
+		resetGameDisplay,
 	};
 })();

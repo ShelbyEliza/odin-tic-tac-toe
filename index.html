@@ -10,67 +10,62 @@
   </head>
 
   <body>
-
-    <h1>Tic Tac Toes!</h1>
-    <div class="info-container">
-      <div class="form-wrapper">
-        <form>
-          <div class="x-details">
-            <label for="player-x">
+    <div class="layout-wrapper">
+      <h1>Tic Tac Toes!</h1>
+      <section class="panel info-container">
+        <div class="form-wrapper">
+          <form>
+            <label for="player-x" class="x-input">
               <h3>Player X: </h3>
               <input id="player-x" name="player-x" type="text" minlength="1" maxlength="18">
             </label>
-          </div>
-          <div class="o-details">
-            <label for="player-o">
+            <label for="player-o" class="o-input">
               <h3>Player O: </h3>
               <input id="player-o" name="player-o" type="text" minlength="1" maxlength="18">
             </label>
+
+            <button class="set-players-btn" type="submit">Set Players</button>
+          </form>
+        </div>
+
+        <div class="player-details" style="display: none;">
+          <h3>Player</h3>
+          <h3>Score</h3>
+          <div>
+            <h4>X</h4>
+            <h4 class="player-x-name"></h4>
           </div>
-
-          <button class="set-players-btn" type="submit">Set Players</button>
-        </form>
-      </div>
-
-      <div class="player-details" style="display: none;">
-        <h3>Player</h3>
-        <h3>Score</h3>
-        <div>
-          <h4>X</h4>
-          <h4 class="player-x-name"></h4>
+          <div>
+            <p class="player-x-score score"></p>
+          </div>
+          <div>
+            <h4>O</h4>
+            <h4 class="player-o-name"></h4>
+          </div>
+          <div>
+            <p class="player-o-score score"></p>
+          </div>
         </div>
-        <div>
-          <p class="player-x-score score"></p>
-        </div>
-        <div>
-          <h4>O</h4>
-          <h4 class="player-o-name"></h4>
-        </div>
-        <div>
-          <p class="player-o-score score"></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-board-wrapper">
-      <div id="1" class="marker-place clickable">1</div>
-      <div id="2" class="marker-place clickable">2</div>
-      <div id="3" class="marker-place clickable">3</div>
-      <div id="4" class="marker-place clickable">4</div>
-      <div id="5" class="marker-place clickable">5</div>
-      <div id="6" class="marker-place clickable">6</div>
-      <div id="7" class="marker-place clickable">7</div>
-      <div id="8" class="marker-place clickable">8</div>
-      <div id="9" class="marker-place clickable">9</div>
-    </div>
-    <div class="bottom-display">
-      <button>Play Again</button>
-      <button>Restart Round</button>
-      <!-- <button style="display: none;">Play Again</button>
-      <button style="display: none;">Restart Round</button> -->
-      <div class="msg">
-        <p class="msg-text"></p>
-      </div>
+        <!-- move into player details / fix grid! -->
+        <section class="bottom-display">
+          <div class="msg">
+            <p class="msg-text"></p>
+          </div>
+          <button class="new-round" style="display: none;">New Round</button>
+          <button class="new-game" style="display: none;">New Game</button>
+        </section>
+      </section>
+      <main class="board">
+        <div id="1" class="marker-place clickable"></div>
+        <div id="2" class="marker-place clickable"></div>
+        <div id="3" class="marker-place clickable"></div>
+        <div id="4" class="marker-place clickable"></div>
+        <div id="5" class="marker-place clickable"></div>
+        <div id="6" class="marker-place clickable"></div>
+        <div id="7" class="marker-place clickable"></div>
+        <div id="8" class="marker-place clickable"></div>
+        <div id="9" class="marker-place clickable"></div>
+      </main>
     </div>
   </body>
 
