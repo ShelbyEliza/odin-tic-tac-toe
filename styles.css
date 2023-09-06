@@ -1,14 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Handjet:wght@500&family=Kanit:wght@400;600&family=Oxygen+Mono&display=swap");
+
+:root {
+	--cloudless: #dedeff;
+	--stardust-evening: rgb(186, 186, 221);
+	--galactic-civilization: rgb(66, 40, 131);
+	--naval-night: rgb(0, 29, 61);
+	--mint-twist: rgb(153, 209, 177);
+	--candle-glow: rgb(255, 233, 193);
+	--green-tea: #c5ecbf;
+	--crystal: #a9d3e2;
+	--morocco: #b96d6dff;
+}
+
 html,
 body {
 	min-height: 100%;
 	margin: 0 auto;
 
 	font-size: 16px;
-	font-family: sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-	background: rgb(186, 186, 221);
+	font-family: "Oxygen Mono", monospace, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif;
 
-	color: rgb(66, 40, 131);
+	background: var(--stardust-evening);
+	color: var(--galactic-civilization);
 }
 button,
 input {
@@ -20,7 +35,11 @@ input {
 	font-size: 100%;
 }
 input {
-	width: 19ch;
+	width: 22ch;
+	margin-left: 0.4rem;
+	padding: 0.2rem;
+
+	font-size: 0.8rem;
 }
 button {
 	margin: 0.4rem;
@@ -28,6 +47,7 @@ button {
 
 	border: none;
 	box-shadow: none;
+	border-radius: 0.4rem;
 
 	height: max-content;
 }
@@ -36,41 +56,45 @@ button:hover {
 }
 
 h1 {
-	text-align: center;
 	grid-column: 1 / 3;
 	grid-row: 1;
 	margin: 0rem;
+	text-align: center;
+
+	font-family: "Handjet", cursive;
+	font-weight: 500;
+	font-size: 4rem;
 }
-h3 {
-	margin: 0.4rem;
-}
-h4 {
-	margin: 0.4rem;
-}
+h3,
 p {
 	margin: 0.4rem;
 }
 .layout-wrapper {
 	display: grid;
-	grid-template-columns: 2fr 4fr;
-	grid-template-rows: 1fr 8fr;
+	grid-template-columns: minmax(150px, 300px) auto;
+	grid-template-rows: 1fr minmax(300px, 8fr);
+
+	justify-content: center;
+	margin: 2rem;
+	padding: 1rem 2rem;
 
 	border-radius: 2rem;
-	padding: 1rem 2rem;
-	margin: 2rem;
-	justify-content: center;
 }
 
 .panel {
-	padding: 0.4rem;
+	display: grid;
+	grid-template-rows: 3fr 2fr 1fr;
 
 	grid-column: 1;
-	grid-row: 2;
+	grid-row: 2 / 3;
 
 	height: 50vw;
-	max-height: 60vh;
+	max-height: 70vh;
+	min-height: 300px;
 
-	background: rgb(153, 209, 177);
+	padding: 0.4rem;
+
+	background: var(--mint-twist);
 	border-top-left-radius: 1rem;
 	border-bottom-left-radius: 1rem;
 }
@@ -86,42 +110,63 @@ form {
 .o-input {
 	grid-row: 2;
 }
-form input {
-	margin-left: 0.4rem;
-	padding: 0.2rem;
-}
+
 form button {
 	grid-row: 3;
 }
 /* details box: */
 .player-details {
-	display: grid;
-	grid-template-columns: 50% 50%;
-	grid-template-rows: 1fr 2fr 2fr;
-}
-.player-details h3 {
-	border-bottom: 1px solid rgb(176, 67, 85);
-	padding-bottom: 0rem;
-}
-.player-details div {
 	display: flex;
+	flex-direction: column;
+
+	grid-row: 1 / 2;
+	align-self: start;
 }
+.labels {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.2rem;
+}
+.x-info p,
+.o-info p {
+	margin: 0rem 0.4rem 0rem 0.4rem;
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+.x-info {
+	margin-bottom: 0.4rem;
+	padding: 0.2rem;
+
+	border-radius: 0.4rem;
+	border-bottom: 1px solid #da8d00;
+	background: var(--candle-glow);
+}
+.o-info {
+	background: var(--green-tea);
+
+	border-radius: 0.4rem;
+	border-bottom: 1px solid #3b982d;
+}
+.bottom-info {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.2rem;
+}
+
 .currentTurn {
-	color: rgb(185, 109, 109);
+	color: var(--morocco);
 }
 /* message box:*/
 .bottom-display {
+	grid-row: 3 / 4;
 	display: grid;
-	grid-template-rows: 1fr 1fr 3fr;
-	background: rgb(153, 209, 177);
-	align-items: end;
 }
-.msg {
-	text-align: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	color: rgb(176, 67, 85);
+.msg-text {
+	grid-row: 2 / 3;
+	color: var(--morocco);
+	font-size: 0.8rem;
+	font-weight: 600;
+	font-family: "Kanit", sans-serif;
 }
 /* board: */
 .board {
@@ -135,33 +180,37 @@ form button {
 
 	text-align: center;
 
-	background: rgb(66, 40, 131);
 	width: 50vw;
 	height: 50vw;
-	max-width: 60vh;
-	max-height: 60vh;
+	max-width: 70vh;
+	max-height: 70vh;
 
 	min-width: 300px;
 	min-height: 300px;
 
-	background: lightblue;
+	background: var(--crystal);
 
 	border-top-right-radius: 1rem;
 	border-bottom-right-radius: 1rem;
 }
 
 .marker-place {
-	border: 1px solid rgb(0, 29, 61);
-	background: rgb(186, 186, 221);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border: 1px solid var(--naval-night);
+	background: var(--stardust-evening);
 	border-radius: 12%;
 	font-size: 6rem;
 }
 .clickable:hover {
 	cursor: pointer;
+	background: var(--cloudless);
 }
 .x-square {
-	background: rgb(255, 233, 193);
+	background: var(--candle-glow);
 }
 .o-square {
-	background: rgb(168, 227, 160);
+	background: var(--green-tea);
 }

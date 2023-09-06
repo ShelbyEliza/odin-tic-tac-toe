@@ -33,9 +33,7 @@ const gameFlow = (() => {
 	const getCurrentPlayer = () => currentPlayer;
 
 	const setTurnsPlayed = () => turnsPlayed++;
-	// const setCurrentPlayer = (player) => {
-	// 	currentPlayer = player;
-	// };
+
 	const setPlayers = (playerInputsEl) => {
 		playerX = Player(playerInputsEl[0].value, "X");
 		playerO = Player(playerInputsEl[1].value, "O");
@@ -107,8 +105,8 @@ const gameFlow = (() => {
 				break;
 		}
 		if (winner) {
-			console.log();
 			displayController.setMsgEl(`${winner.name} wins!`);
+			gameBoard.removeClickable();
 			if (winner.marker == "X") {
 				playerX.increaseScore();
 				displayController.setScore(playerX);
@@ -118,7 +116,6 @@ const gameFlow = (() => {
 			}
 		} else if (turnsPlayed >= 9) {
 			displayController.setMsgEl("A tie has occurred! Try Again?");
-			console.log("A tie has occurred!");
 		} else {
 			toggleCurrentTurn();
 		}
@@ -131,7 +128,11 @@ const gameFlow = (() => {
 		winner = null;
 	};
 	const handleNewRound = () => {
-		currentPlayer = winner;
+		if (winner === null) {
+			currentPlayer = playerX;
+		} else {
+			currentPlayer = winner;
+		}
 		winner = null;
 		turnsPlayed = 1;
 	};
@@ -157,6 +158,11 @@ const gameBoard = (() => {
 			el.addEventListener("click", handleSelectSquare);
 		});
 	};
+	function removeClickable() {
+		boardEls.forEach((el) => {
+			el.classList.remove("clickable");
+		});
+	}
 
 	function resetSquares() {
 		boardEls.forEach((square) => {
@@ -192,15 +198,14 @@ const gameBoard = (() => {
 
 	function checkSquareStatus(squareToMark) {
 		let winner = gameFlow.getWinner();
-		displayController.setMsgEl("");
 		if (
 			squareToMark.textContent !== "O" &&
 			squareToMark.textContent !== "X" &&
 			winner === null
 		) {
+			displayController.setMsgEl("");
 			return true;
 		} else {
-			displayController.setMsgEl("Invalid Square");
 			return false;
 		}
 	}
@@ -217,12 +222,13 @@ const gameBoard = (() => {
 	addListeners();
 	return {
 		resetSquares,
+		removeClickable,
 	};
 })();
 
 const displayController = (() => {
 	const msgEl = document.querySelector(".msg-text");
-	const playerForm = document.querySelector(".form-wrapper");
+	const playerForm = document.querySelector("form");
 	const playerInputsEl = [...document.querySelectorAll("input")];
 	const setPlayersBtn = document.querySelector(".set-players-btn");
 
@@ -265,18 +271,16 @@ const displayController = (() => {
 
 	let displayBuilt = false;
 
-	setPlayersBtn.addEventListener("click", (e) => {
-		handleStartGame(e);
-	});
+	setPlayersBtn.addEventListener("click", handleStartGame);
 
-	const handleStartGame = (e) => {
+	function handleStartGame(e) {
 		e.preventDefault();
 		if (checkIfValidName(playerInputsEl)) {
 			gameFlow.setPlayers(playerInputsEl);
 			buildDisplay(playerX, playerO);
 			return;
 		}
-	};
+	}
 	const checkIfValidName = (inputs) => {
 		let validName = true;
 		inputs.forEach((input) => {
