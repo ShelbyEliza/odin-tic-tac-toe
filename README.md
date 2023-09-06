@@ -27,6 +27,10 @@ Factory objects: Player (Player1, Player2).
     - Restart button
 - Players can be:
   - Two users,
-  - One user and one AI,
-  - Two AIs
-- Create an unbeatable AI using the [minimax algorithm](https://en.wikipedia.org/wiki/Minimax)
+
+### Future Plans:
+
+Create an unbeatable AI using the [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
+
+Players could be:
+One user and one AI or two AIs
